@@ -1,0 +1,90 @@
+@use "../globals/variables" as v;
+@use "../abstracts/breakpoints" as b;
+@use "../abstracts/functions" as f;
+
+.form {
+  margin-top: f.em(64);
+  position: relative;
+
+  @include b.mq-up(medium) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: f.em(32);
+  }
+
+  &__group {
+    @include b.mq-up(medium) {
+      width: 60%;
+    }
+
+    &[data-error] .form__input {
+      border-color: v.$sec__light-red;
+      background: #fffafa;
+    }
+
+    &[data-error]::after {
+      content: attr(data-error);
+      font-size: f.rem(18);
+      color: v.$sec__light-red;
+      display: block;
+      text-align: center;
+      margin: f.em(14) 0 f.em(16);
+    }
+
+    @include b.mq-up(large) {
+      &[data-error]::after {
+        content: attr(data-error);
+        font-size: f.rem(18);
+        color: v.$sec__light-red;
+        display: block;
+        text-align: left;
+        padding: f.em(15) 0 0 f.em(15);
+        position: absolute;
+        margin: 0;
+      }
+    }
+  }
+
+  &__input {
+    padding: f.em(19) 0 f.em(19) f.em(30);
+    width: 100%;
+    font-size: f.rem(18);
+    border: 2px solid v.$sec__pale-blue;
+    border-radius: 40px;
+    transition: border 300ms ease-in-out;
+
+    &::placeholder {
+      color: v.$sec__pale-blue;
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid v.$neut__gray;
+    }
+  }
+
+  &__btn {
+    padding: f.em(14) 0;
+    width: 100%;
+    font-size: f.rem(24);
+    border-radius: 40px;
+    background: v.$pri__blue;
+    margin-top: f.em(16);
+    color: white;
+    font-weight: 600;
+    box-shadow: 3px 10px 10px hsla(223, 87%, 63%, 0.233);
+    cursor: pointer;
+    transition: background 300ms ease-in-out;
+
+    @include b.mq-up(medium) {
+      width: 37%;
+      margin: 0;
+    }
+
+    &:hover {
+      background: hsla(223, 87%, 63%, 0.639);
+    }
+  }
+}
